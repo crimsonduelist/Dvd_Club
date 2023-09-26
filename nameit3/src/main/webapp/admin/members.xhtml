@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>head title</title>
+    </h:head>
+    <h:body>        
+        <div id="wrapper">
+            <nav>
+                <ui:include src="/admintemplates/navbar.xhtml"/>
+            </nav>
+            <h:form id="membersForm">
+                <p:messages id="messages" showDetail="true" for="membersForm" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableMembersField" legend="MEMBERS">
+                    <p:dataTable id="availableMembers" var="membersvar" value="#{memberController.members}">
+
+
+                        <p:column headerText="MNo">
+                            <h:outputText value="#{membersvar.MNo}" />
+                        </p:column>
+
+                        <p:column headerText="MFirstName">
+                            <h:inputText value="#{membersvar.MFirstName}" />
+                        </p:column>
+
+                        <p:column headerText="MLastName">
+                            <h:inputText value="#{membersvar.MLastName}" />
+                        </p:column>
+
+                        <p:column headerText="MRegDate">
+                            <p:datePicker id="time" value="#{membersvar.MRegDate}" showTime="true"/>
+
+                        </p:column>
+                        <p:column headerText="MAddress">
+                            <h:inputText value="#{membersvar.MAddress}" />
+                        </p:column>
+
+                        <p:column headerText="MDvdCount">
+                            <h:inputText value="#{membersvar.MDvdCount}" >
+
+                            </h:inputText>
+                        </p:column>
+
+                        <p:column >
+                            <p:commandButton value="X" action="#{memberController.deleteMember(membersvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{memberController.addMember}" update="@form" />
+                <p:commandLink value="Save" action="#{memberController.save}" update="@form" />
+
+            </h:form>
+
+            <h:form id="phonesForm">
+                <p:messages id="messages" showDetail="true" for="phonesForm" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availablePhonesField" legend="PHONES">
+                    <p:dataTable id="availablePhones" var="phonesvar" value="#{phoneController.phones}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="MNo">
+                            <h:inputText value="#{phonesvar.MNo}" />
+                        </p:column>
+
+                        <p:column headerText="MPhoneNo">
+                            <h:inputText value="#{phonesvar.MPhoneNo}" />
+                        </p:column>
+
+                        <p:column >
+                            <p:commandLink value="X" action="#{phoneController.deletePhone(phonesvar)}" update="@form" ajax="false" />
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{phoneController.addPhone}" update="@form" ajax="false" />
+                <p:commandLink value="Save" action="#{phoneController.save}" update="@form" ajax="false" />
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

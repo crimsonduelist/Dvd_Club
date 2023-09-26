@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>head title</title>
+    </h:head>
+    <h:body>        
+        <div id="wrapper">
+<nav>
+                <ui:include src="/admintemplates/navbar.xhtml"/>
+            </nav>
+            <h:form id="dvdsForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableDvdsField" legend="DVDS">
+                    <p:dataTable id="availableDvds" var="dvdsvar" value="#{dvdController.dvds}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{dvdsvar.DCode}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{dvdsvar.DTitle}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{dvdsvar.DDirector}" />
+                        </p:column>
+
+                        <p:column headerText="DAcquisitionCost">
+                            <h:inputText value="#{dvdsvar.DAcquisitionCost}" />
+                        </p:column>
+
+                        <p:column headerText="DCategoryCount">
+                            <h:inputText value="#{dvdsvar.DCategoryCount}" />
+                        </p:column>
+
+                        <p:column headerText="dvdLendCost">
+                            <h:inputText value="#{dvdsvar.dvdLendCost}" />
+                        </p:column>
+
+                        <p:column headerText="DLendTimes">
+                            <h:inputText value="#{dvdsvar.DLendTimes}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandButton value="X" action="#{dvdController.deleteDvd(dvdsvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandButton value="Add" action="#{dvdController.addDvd}" update="@form" ajax="false" />
+                <p:commandButton value="Save" action="#{dvdController.save}" update="@form" ajax="false" />
+                
+
+            </h:form>
+            
+            <h:form id="categoriesForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableCategoriesField" legend="CATEGORIES">
+                    <p:dataTable id="availableCategories" var="categoriesvar" value="#{categoryController.categories}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{categoriesvar.CName}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{categoriesvar.CDvdCount}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandLink value="X" action="#{categoryController.deleteCategory(categoriesvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{categoryController.addCategory}" update="@form" />
+                <p:commandLink value="Save" action="#{categoryController.save}" update="@form" />
+ 
+            </h:form>
+            
+            <h:form id="includesForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableIncludesField" legend="Includes">
+                    <p:dataTable id="availableIncludes" var="includesvar" value="#{includesController.includesList}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{includesvar.AName}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{includesvar.DCode}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandLink value="X" action="#{includesController.deleteIncludes(includesvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{includesController.addInclududes}" update="@form" />
+                <p:commandLink value="Save" action="#{includesController.save}" update="@form" />
+                
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>head title</title>
+    </h:head>
+    <h:body>        
+        <div id="wrapper">
+            <nav>
+                <ui:include src="/admintemplates/navbar.xhtml"/>
+            </nav>
+            <h:form id="borrowedForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableBorrowsField" legend="Borrowed">
+                    <p:dataTable id="availableBorrows" var="borrowsvar" value="#{borrowController.borrows}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="outDate">
+                            <p:datePicker  value="#{borrowsvar.outDate}" showTime="true"/>
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{borrowsvar.DCode}" />
+                        </p:column>
+
+                        <p:column headerText="MNo">
+                            <h:inputText value="#{borrowsvar.MNo}" />
+                        </p:column>
+
+                        <p:column headerText="outDate">
+                            <p:datePicker  value="#{borrowsvar.inDate}" showTime="true"/>
+                        </p:column>
+
+                        <p:column >
+                            <p:commandLink value="X" action="#{borrowController.deleteBorrow(borrowsvar)}" update="@form" ajax="false" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandButton value="Add" action="#{borrowController.addBorrow}" update="@form" ajax="false" />
+                <p:commandButton value="Save" action="#{borrowController.save}" update="@form" ajax="false" />
+            </h:form>
+
+            
+
+        </div>
+    </h:body>
+</html>
+

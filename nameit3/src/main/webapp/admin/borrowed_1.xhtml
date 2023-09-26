@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>head title</title>
+    </h:head>
+    <h:body>        
+        <div id="wrapper">
+<nav>
+                <ui:include src="/admintemplates/navbar.xhtml"/>
+            </nav>
+            <h:form id="borrowsForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableActorsField" legend="Borrowed">
+                    <p:dataTable id="availableActors" var="borrowsvar" value="#{borrowController.borrows}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{borrowsvar.DCode}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{borrowsvar.DTitle}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{borrowsvar.DDirector}" />
+                        </p:column>
+
+                        <p:column headerText="DAcquisitionCost">
+                            <h:inputText value="#{borrowsvar.DAcquisitionCost}" />
+                        </p:column>
+
+                        <p:column headerText="DCategoryCount">
+                            <h:inputText value="#{borrowsvar.DCategoryCount}" />
+                        </p:column>
+
+                        <p:column headerText="borrowLendCost">
+                            <h:inputText value="#{borrowsvar.borrowLendCost}" />
+                        </p:column>
+
+                        <p:column headerText="DLendTimes">
+                            <h:inputText value="#{borrowsvar.DLendTimes}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandButton value="X" action="#{borrowController.deleteActor(borrowsvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandButton value="Add" action="#{borrowController.addActor()}" update="@form" ajax="false" />
+                <p:commandButton value="Save" action="#{borrowController.save}" update="@form" ajax="false" />
+                
+
+            </h:form>
+            
+            <h:form id="categoriesForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableCategoriesField" legend="CATEGORIES">
+                    <p:dataTable id="availableCategories" var="categoriesvar" value="#{categoryController.categories}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{categoriesvar.CName}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{categoriesvar.CDvdCount}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandLink value="X" action="#{categoryController.deleteCategory(categoriesvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{categoryController.addCategory}" update="@form" />
+                <p:commandLink value="Save" action="#{categoryController.save}" update="@form" />
+ 
+            </h:form>
+            
+            <h:form id="includesForm">
+                <p:messages id="messages" showDetail="true" closable="FALSE">
+                    <p:autoUpdate/>
+                </p:messages>
+                <p:fieldset id="availableIncludesField" legend="Includes">
+                    <p:dataTable id="availableIncludes" var="includesvar" value="#{includesController.includesList}">
+                        <p:column style="width:20px">
+                            <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
+                        </p:column>
+
+                        <p:column headerText="DCode">
+                            <h:inputText value="#{includesvar.AName}" />
+                        </p:column>
+
+                        <p:column headerText="DTitle">
+                            <h:inputText value="#{includesvar.DCode}" />
+                        </p:column>
+                        <p:column >
+                            <p:commandLink value="X" action="#{includesController.deleteIncludes(includesvar)}" update="@form" />
+
+                        </p:column>
+                    </p:dataTable>
+                </p:fieldset>
+                <p:commandLink value="Add" action="#{includesController.addInclududes}" update="@form" />
+                <p:commandLink value="Save" action="#{includesController.save}" update="@form" />
+                
+
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
