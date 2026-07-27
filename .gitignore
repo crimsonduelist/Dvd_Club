@@ -22,3 +22,11 @@ Thumbs.db
 *.jar
 *.war
 *.ear
+
+# Logs
+*.log
+
+# Notes
+*.md
+!README.md
+*.log

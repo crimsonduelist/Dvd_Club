@@ -22,17 +22,27 @@ A web-based DVD club management system built with Java EE (JSF/PrimeFaces) and M
 
 ## Quick Start
 
+**Dependencies:** Docker only. Everything else runs inside containers.
+
 ```bash
 ./build.sh
 ```
 
-This sets up Docker containers, seeds the database, compiles and deploys the app.
+This creates Docker containers, seeds the databases, compiles and deploys the app.
 
 App runs at http://localhost:8080/dvdclub
 
 **Default accounts:**
-- Admin: `admin` / `admin`
+- Admin: `admin` / `admin` (use this)
 - User: `user` / `user`
+
+## Uninstall
+
+```bash
+./docker_undo.sh
+```
+
+Stops and removes all containers, volumes, network, and the WildFly image.
 
 ## Scripts
 
@@ -43,6 +53,7 @@ App runs at http://localhost:8080/dvdclub
 | `seed_sql.sh` | Seeds both databases if empty |
 | `deploy_to_wildfly.sh` | Compiles WAR, uploads to WildFly, restarts server |
 | `drop_db.sh` | Drops both databases for a fresh start |
+| `docker_undo.sh` | Tears down everything (containers, volumes, network, images) |
 
 ## Databases
 
