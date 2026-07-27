@@ -101,20 +101,16 @@ public class UserController implements Serializable {
         }
     }
 
-    public void doLogout() throws IOException {
+    public String doLogout() {
         System.out.println("dologout");
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
             subject.logout();
             System.out.println("logged out");
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse) context
-                    .getExternalContext()
-                    .getResponse();
-            response.sendRedirect("main.xhtml");
-        } else if (!subject.isAuthenticated()) {
+        } else {
             System.out.println("not authed");
         }
+        return "/login.xhtml?faces-redirect=true";
     }
 
     public void testm() {

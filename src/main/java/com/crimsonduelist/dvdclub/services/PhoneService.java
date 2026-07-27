@@ -53,7 +53,7 @@ public class PhoneService {
      * @return
      */
     public Phone save(Phone entity) {
-        if (entity.getMNo()< 0 || entity.getMPhoneNo()< 0) {
+        if (entity.getMNo()< 0 || entity.getMPhoneNo() == null || entity.getMPhoneNo().isEmpty()) {
             return create(entity);
         }
         return update(entity);

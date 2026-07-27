@@ -51,7 +51,7 @@ public class PhoneController implements Serializable{
   }
 
   public String deletePhone(Phone phone) {
-    if (phone.getMNo() >= 0 && phone.getMPhoneNo() >= 0 ) {
+    if (phone.getMNo() >= 0 && phone.getMPhoneNo() != null && !phone.getMPhoneNo().isEmpty() ) {
       _deletedPhones.add(phone);
     }
     _phones.remove(phone);

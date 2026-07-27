@@ -1,0 +1,9 @@
+embed-server --server-config=standalone.xml --std-out=echo
+
+/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-class-name=com.mysql.cj.jdbc.Driver)
+
+data-source add --name=MYSQL_DS_DVDCLUB --jndi-name=java:/MYSQL_DS_DVDCLUB --driver-name=mysql --connection-url=jdbc:mysql://dvdclub-db:3306/dvdclub_db --user-name=user --password=pass --validate-on-match=true --min-pool-size=2 --max-pool-size=20 --blocking-timeout-wait-millis=5000
+
+data-source add --name=MYSQL_DS_DVDCLUB_AUTH --jndi-name=java:/MYSQL_DS_DVDCLUB_AUTH --driver-name=mysql --connection-url=jdbc:mysql://dvdclub-db:3306/dvdclub_auth_db --user-name=user --password=pass --validate-on-match=true --min-pool-size=2 --max-pool-size=20 --blocking-timeout-wait-millis=5000
+
+stop-embedded-server

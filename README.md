@@ -15,63 +15,70 @@ A web-based DVD club management system built with Java EE (JSF/PrimeFaces) and M
 
 - Java EE 8 (JSF 2.3, PrimeFaces 10)
 - Apache Shiro (authentication & authorization)
-- MySQL/MariaDB
-- WildFly 26.1.0.Final
+- MySQL 8
+- WildFly 25
 - Maven
+- Docker
 
-## Setup
-
-### Prerequisites
-
-- Java 8 JDK
-- Maven
-- MySQL/MariaDB
-- WildFly 26.1.0.Final
-
-### Database Setup
-
-1. Run `sql/01_schema.sql` to create the DVD Club database
-2. Run `sql/02_users.sql` to create the authentication database
-3. (Optional) Run `sql/03_samples.sql` to populate with sample data
-
-### WildFly Configuration
-
-1. Add MySQL JDBC driver to WildFly
-2. Create two datasources in WildFly:
-   - `MYSQL_DS_CREDENTIALS3` → DVD Club database
-   - `MYSQL_DS_CREDENTIALS2` → Users database
-3. Update `src/main/resources/META-INF/persistence.xml` if you change datasource names
-4. Update `src/main/webapp/WEB-INF/shiro.ini` if you change datasource names
-
-### Build & Deploy
+## Quick Start
 
 ```bash
-mvn clean package
+./build.sh
 ```
 
-Deploy `target/dvdclub-1.0.war` to WildFly.
+This sets up Docker containers, seeds the database, compiles and deploys the app.
+
+App runs at http://localhost:8080/dvdclub
+
+**Default accounts:**
+- Admin: `admin` / `admin`
+- User: `user` / `user`
+
+## Scripts
+
+| Script | What it does |
+|--------|-------------|
+| `build.sh` | Full setup: Docker + DB seed + compile + deploy |
+| `docker_setup.sh` | Creates MySQL + WildFly containers |
+| `seed_sql.sh` | Seeds both databases if empty |
+| `deploy_to_wildfly.sh` | Compiles WAR, uploads to WildFly, restarts server |
+| `drop_db.sh` | Drops both databases for a fresh start |
+
+## Databases
+
+- `dvdclub_db` — main app data (DVDs, members, loans, actors, categories)
+- `dvdclub_auth_db` — Shiro authentication (users, roles)
 
 ## Project Structure
 
 ```
 src/main/java/com/crimsonduelist/dvdclub/
-├── controllers/     # JSF managed beans (backing beans)
+├── controllers/     # JSF managed beans
 ├── entities/        # JPA entity classes
-├── services/        # Business logic layer
+├── services/        # Business logic (EJBs)
 ├── helpers/         # Utility classes
-└── shiro/           # Apache Shiro integration
+├── shiro/           # Apache Shiro integration
+└── shiro/controllers/ # Login/logout controller
 src/main/webapp/
 ├── admin/           # Admin-facing pages
 ├── user/            # User-facing pages
 ├── templates/       # Shared UI templates
+├── admintemplates/  # Admin navbar
+├── usertemplates/   # User navbar
+├── login.xhtml      # Login page
+├── main.xhtml       # Home page (public)
+├── error.xhtml      # Error page
 └── WEB-INF/         # Configuration (web.xml, shiro.ini)
 sql/                 # Database setup scripts
+sql/drop/            # Scripts that need root access
+docker/              # WildFly Docker image (MySQL driver + datasources)
 docs/                # ER diagram
 ```
 
-## Known Issues
+## TODO
 
-- Deleting the last row of a table may cause errors
-- Non-admin user side needs more implementation
-- Registration and password hashing not yet implemented
-- Shiro filter may affect JSF/PrimeFaces styling on first page load (workaround: COOKIE tracking mode)
+- [ ] (decouple container creation from config)
+- [ ] Non-admin user view needs implementation
+- [ ] Registration and password hashing not yet implemented
+- [ ] Deleting the last row of a table may cause errors
+- [ ] More views for anonymous users

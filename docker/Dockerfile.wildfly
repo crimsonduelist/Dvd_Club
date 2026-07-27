@@ -1,0 +1,19 @@
+FROM jboss/wildfly:25.0.0.Final
+
+USER root
+
+RUN mkdir -p /opt/jboss/wildfly/modules/com/mysql/main
+
+RUN curl -sSL -o /opt/jboss/wildfly/modules/com/mysql/main/mysql-connector-j-8.0.33.jar \
+    https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar
+
+COPY docker/module.xml /opt/jboss/wildfly/modules/com/mysql/main/
+COPY docker/configure-datasources.cli /opt/jboss/
+
+RUN /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/configure-datasources.cli
+
+RUN chown -R jboss:jboss /opt/jboss/wildfly
+
+USER jboss
+
+EXPOSE 8080 9990

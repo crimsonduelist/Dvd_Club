@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,9 +40,8 @@ public class Actor implements Serializable {
     private String aName;
     @Column(name = "aOscar")
     private Integer aOscar;
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    //JoinColumn(name = "")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "aName", referencedColumnName = "aName")
     private Collection<Playsin> playsinCollection;
 
     public Actor() {

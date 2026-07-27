@@ -30,7 +30,7 @@ public class Phone implements Serializable {
     @NotNull
     @Size(min = 10, max = 10)
     @Column(name = "mPhoneNo", nullable = false, length = 10)
-    private Integer _mPhoneNo;
+    private String _mPhoneNo;
 
 //    public Phone() {
 //    }
@@ -48,11 +48,11 @@ public class Phone implements Serializable {
         this._mNo = mNo;
     }
 
-    public Integer getMPhoneNo() {
+    public String getMPhoneNo() {
         return _mPhoneNo;
     }
 
-    public void setMPhoneNo(Integer mPhoneNo) {
+    public void setMPhoneNo(String mPhoneNo) {
         this._mPhoneNo = mPhoneNo;
     }
 

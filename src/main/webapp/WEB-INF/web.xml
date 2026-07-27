@@ -29,15 +29,15 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
     </welcome-file-list>
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
-        <location>main.xhtml</location>
+        <location>/error.xhtml</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/main.xhtml</location>
+        <location>/error.xhtml</location>
     </error-page>
     
     <!-- Apache Shiro -->
-<!--    <listener>
+    <listener>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
     <filter>
@@ -51,6 +51,6 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
-    </filter-mapping>-->
+    </filter-mapping>
     <!-- Apache Shiro -->
 </web-app>
